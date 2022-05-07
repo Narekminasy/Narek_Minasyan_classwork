@@ -9,33 +9,39 @@ const {
     COOKIE_SECRET,
 } = process.env;
 
-export default  async (req, res, next) => {
+export default async (req, res, next) => {
     try {
-        // const token = String(req.headers?.authorization).replace('bearer').trim() || null;
-        // const token = req.signedCookies?.usertoken || req.cookies?.usertoken || null;
-        const token = (req.signedCookies && req.signedCookies.usertoken) ? req.signedCookies.usertoken : (req.cookies?.usertoken || null);
-        console.log(token);
+        const token = (req.signedCookies && req.signedCookies.usertoken)
+            ? req.signedCookies.usertoken
+            : (req.cookies?.usertoken || null);
+
+        console.log("Token in middleware:", token);
+
         if (!token) {
-            next(new HttpErrors(401));
-            return;
+            return res.redirect('/login');
         }
+
         let decrytData = null;
         try {
             decrytData = jwt.verify(token, TOKEN_SECRET);
-        }catch (err){
-            console.log(err.message);
+        } catch (err) {
+            console.log('JWT Error:', err.message);
+            res.clearCookie('usertoken');
+            return res.redirect('/login');
         }
+
         if (!decrytData || !decrytData?.userId) {
-            next(new HttpErrors(401));
-            return;
+            return res.redirect('/login');
         }
+
         req.userId = decrytData?.userId;
 
         const user = await Users.findByPk(req.userId);
-        if(!user) {
-            next(new HttpErrors(401));
-            return;
+
+        if (!user) {
+            return res.redirect('/login');
         }
+
         next();
     } catch (error) {
         next(new HttpErrors(error));

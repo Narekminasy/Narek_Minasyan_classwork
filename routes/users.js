@@ -1,18 +1,19 @@
 import {Router} from 'express';
-import auth from "../middlewares/authorization.js";
 import validation from "../middlewares/validation.js";
 import schema from "../middlewares/schemas/users.schema.js";
 import { controller } from "../controllers/users.js";
+import authcheck from '../middlewares/authorization.js';
+import guestCheck from '../middlewares/guest.js';
 
 
 const router = new Router();
 
 
-router.get("/home", auth, (req, res) => {
-    res.send("home.ejs");
+router.get("/home", authcheck, (req, res) => {
+    res.render("home.ejs");
 });
 
-router.get('/register', (req, res) => {
+router.get('/register', guestCheck, (req, res) => {
     res.render('register.ejs');
 });
 
@@ -22,7 +23,7 @@ router.post(
     controller.register
 );
 
-router.get('/login', (req, res) => {
+router.get('/login', guestCheck, (req, res) => {
     res.render('login.ejs');
 });
 router.post(
@@ -30,5 +31,11 @@ router.post(
     validation(schema.login, 'body'),
     controller.login
 );
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('usertoken');
+    res.redirect('/login');
+});
+
 
 export default router;
