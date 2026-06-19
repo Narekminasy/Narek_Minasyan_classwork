@@ -1,0 +1,40 @@
+{
+  "name": "narek_minasyan_classwork",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://github.com/Narekminasy/Narek_Minasyan_classwork#readme",
+  "bugs": {
+    "url": "https://github.com/Narekminasy/Narek_Minasyan_classwork/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Narekminasy/Narek_Minasyan_classwork.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-mysql-session": "^3.0.3",
+    "express-session": "^1.19.0",
+    "http-errors": "^2.0.1",
+    "joi": "^18.2.3",
+    "jsonwebtoken": "^9.0.3",
+    "lodash": "^4.18.1",
+    "md5": "^2.3.0",
+    "moment": "^2.30.1",
+    "morgan": "^1.11.0",
+    "mysql2": "^3.22.5",
+    "nodemon": "^3.1.14",
+    "sequelize": "^6.37.8",
+    "uuid": "^14.0.0"
+  }
+}
