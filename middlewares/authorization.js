@@ -1,7 +1,7 @@
 import HttpErrors from "http-errors";
 import moment from "moment";
 import jwt from 'jsonwebtoken';
-import Users from "../models/User.js";
+import Users from "../models/Users.js";
 
 const {
     PASSWORD_SECRET,

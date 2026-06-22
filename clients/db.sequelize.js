@@ -1,3 +1,7 @@
+import { Sequelize } from 'sequelize';
+import 'dotenv/config';
+
+
 const {
     MY_SQL_HOST,
     MY_SQL_DATABASE,

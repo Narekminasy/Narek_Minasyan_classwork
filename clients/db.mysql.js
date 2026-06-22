@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import mysql from 'mysql2';
 
+
 const {MY_SQL_HOST, MY_SQL_PORT, MY_SQL_USER, MY_SQL_PASSWORD, MY_SQL_DATABASE} = process.env;
 
 const connection = mysql.createConnection({
